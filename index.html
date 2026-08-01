@@ -1,85 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaru ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise For Aaru</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-body{
-margin:0;
-padding:0;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-font-family:Arial,sans-serif;
-overflow:hidden;
-}
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 0 20px rgba(0,0,0,.2);
-text-align:center;
-animation:fade 2s;
-}
+        .card {
+            background: #ffffff;
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 320px;
+            transition: all 0.3s ease;
+        }
 
-h1{
-color:#ff3366;
-}
+        .title {
+            color: #ff3366;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
 
-button{
-padding:12px 25px;
-border:none;
-border-radius:30px;
-background:#ff3366;
-color:white;
-font-size:18px;
-cursor:pointer;
-}
+        .subtitle {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
 
-button:hover{
-background:#ff1744;
-}
+        .btn {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(255, 51, 102, 0.3);
+            transition: transform 0.2s;
+        }
 
-#msg{
-display:none;
-margin-top:20px;
-font-size:20px;
-color:#d81b60;
-}
+        .btn:active {
+            transform: scale(0.95);
+        }
 
-@keyframes fade{
-from{opacity:0;transform:scale(.8);}
-to{opacity:1;transform:scale(1);}
-}
-</style>
+        /* Part 1 Terminal Styling */
+        .terminal-box {
+            background: #111;
+            color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            display: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .network-tag {
+            color: #ff3366;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .progress-bg {
+            width: 100%;
+            background: #333;
+            height: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #ff3366;
+            transition: width 0.1s linear;
+        }
+
+        .conn-text {
+            color: #4eed96;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-<h1>❤️ Aaru ❤️</h1>
+    <!-- Phase 0: Main Screen -->
+    <div id="mainCard" class="card">
+        <div class="title">❤️ Aaru ❤️</div>
+        <p class="subtitle">Ek chhota sa surprise...</p>
+        <button class="btn" onclick="startSurprise()">Click Here</button>
+    </div>
 
-<p>Ek chhota sa surprise...</p>
+    <!-- Phase 1: Love Network Loading Terminal -->
+    <div id="loadingCard" class="card terminal-box">
+        <div class="network-tag">LOVE NETWORK™</div>
+        <p style="font-size: 0.85rem; color: #aaa;">Searching for Aaru...</p>
+        
+        <div class="progress-bg">
+            <div id="progress" class="progress-bar"></div>
+        </div>
+        
+        <span id="percentText" style="font-size: 0.8rem; color: #888;">Loading 0%</span>
+        
+        <div id="connFound" class="conn-text">
+            ✔ Connection Found
+        </div>
+    </div>
 
-<button onclick="showLove()">Click Here</button>
+    <script>
+        function startSurprise() {
+            document.getElementById('mainCard').style.display = 'none';
+            document.getElementById('loadingCard').style.display = 'block';
 
-<div id="msg">
-<h2>Tu majhya ayushyatli sarvat sundar gosht ahes. ❤️</h2>
+            let progress = 0;
+            const progressFill = document.getElementById('progress');
+            const percentText = document.getElementById('percentText');
+            const connFound = document.getElementById('connFound');
 
-<p>I Love You Forever 💖</p>
-</div>
-</div>
+            const interval = setInterval(() => {
+                progress += 2;
+                progressFill.style.width = progress + '%';
+                percentText.innerText = `Loading ${progress}%`;
 
-<script>
-function showLove(){
-document.getElementById("msg").style.display="block";
-}
-</script>
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    connFound.style.display = 'block';
 
+                    if ("vibrate" in navigator) {
+                        navigator.vibrate([200, 100, 200]);
+                    }
+
+                    setTimeout(() => {
+                        // Part 2 Trigger
+                        alert("Part 1 Complete! Ab Phase 2 (Incoming Call) add karenge.");
+                    }, 1500);
+                }
+            }, 100);
+        }
+    </script>
 </body>
-  </html>
+</html>
