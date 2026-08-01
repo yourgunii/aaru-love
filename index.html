@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise For Aaru</title>
+    <title>Surprise For Aaru 💖</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -18,17 +18,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
 
         .card {
             background: #ffffff;
-            padding: 30px 25px;
+            padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
             width: 100%;
-            max-width: 320px;
+            max-width: 350px;
             transition: all 0.3s ease;
         }
 
@@ -62,7 +62,7 @@
             transform: scale(0.95);
         }
 
-        /* Part 1 Terminal Styling */
+        /* Phase 1: Terminal Loading */
         .terminal-box {
             background: #111;
             color: #fff;
@@ -101,18 +101,106 @@
             font-weight: bold;
             display: none;
         }
+
+        /* Phase 2: Call UI */
+        .call-card {
+            background: #0f172a;
+            color: white;
+            border-radius: 24px;
+            padding: 40px 20px;
+            display: none;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .caller-avatar {
+            width: 80px;
+            height: 80px;
+            background: #ff3366;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 51, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0); }
+        }
+
+        .call-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .call-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accept-btn { background: #22c55e; color: white; }
+        .reject-btn { background: #ef4444; color: white; }
+
+        /* Phase 3 & 4: Gallery & Marathi Message */
+        .surprise-card {
+            display: none;
+            background: #fff0f3;
+            border: 2px solid #ffb3c1;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .marathi-note {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #ff3366;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Phase 0: Main Screen -->
+    <!-- Start Screen -->
     <div id="mainCard" class="card">
         <div class="title">❤️ Aaru ❤️</div>
         <p class="subtitle">Ek chhota sa surprise...</p>
         <button class="btn" onclick="startSurprise()">Click Here</button>
     </div>
 
-    <!-- Phase 1: Love Network Loading Terminal -->
+    <!-- Phase 1: Love Network Terminal -->
     <div id="loadingCard" class="card terminal-box">
         <div class="network-tag">LOVE NETWORK™</div>
         <p style="font-size: 0.85rem; color: #aaa;">Searching for Aaru...</p>
@@ -125,6 +213,39 @@
         
         <div id="connFound" class="conn-text">
             ✔ Connection Found
+        </div>
+    </div>
+
+    <!-- Phase 2: Incoming Call Screen -->
+    <div id="callCard" class="card call-card">
+        <div class="caller-avatar">💖</div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 5px;">Aaru 💗</h2>
+        <p style="color: #94a3b8; font-size: 0.9rem;">Incoming Call...</p>
+
+        <div class="call-actions">
+            <button class="call-btn reject-btn" onclick="declineCall()">📵</button>
+            <button class="call-btn accept-btn" onclick="acceptCall()">📞</button>
+        </div>
+    </div>
+
+    <!-- Phase 3 & 4: Gallery & Marathi Note -->
+    <div id="surpriseCard" class="card surprise-card">
+        <h2 style="color: #ff3366; font-size: 1.4rem;">Our Special Moments ✨</h2>
+        
+        <!-- Photo Gallery (Baad me apni image file names se replace kar sakte ho) -->
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=300&q=80" alt="Memory 1">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=300&q=80" alt="Memory 2">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=300&q=80" alt="AI Photo 1">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="AI Photo 2">
+        </div>
+
+        <!-- Romantic Marathi Message -->
+        <div class="marathi-note">
+            <p><strong>तू सोबत असताना प्रत्येक क्षण खास असतो... 💖</strong></p>
+            <p style="margin-top: 8px;">
+                तुझं हसणं, तुझी साथ आणि तुझं माझ्या आयुष्यात असणं हेच माझ्यासाठी सर्वात मोठं गिफ्ट आहे. नेहमी अशीच सोबत रहा! ✨
+            </p>
         </div>
     </div>
 
@@ -148,15 +269,24 @@
                     connFound.style.display = 'block';
 
                     if ("vibrate" in navigator) {
-                        navigator.vibrate([200, 100, 200]);
+                        navigator.vibrate([200, 100, 200, 100, 300]);
                     }
 
                     setTimeout(() => {
-                        // Part 2 Trigger
-                        alert("Part 1 Complete! Ab Phase 2 (Incoming Call) add karenge.");
+                        document.getElementById('loadingCard').style.display = 'none';
+                        document.getElementById('callCard').style.display = 'block';
                     }, 1500);
                 }
             }, 100);
+        }
+
+        function acceptCall() {
+            document.getElementById('callCard').style.display = 'none';
+            document.getElementById('surpriseCard').style.display = 'block';
+        }
+
+        function declineCall() {
+            alert("Aaru, reject nahi kar sakte! 😉 (Accept par click karo)");
         }
     </script>
 </body>
